@@ -1,5 +1,62 @@
+/* 
+========== GENERIC STYLES ==============
+*/
 * {
     margin: 0;
+    padding: 0;
     box-sizing: border-box;
-    color: red;
+}
+
+/* 
+========== HOME PAGE STYLES ==============
+*/
+
+.home-page-container{
+    display: flex;
+    height: 100vh;
+    width: 100% !important;
+    background: url(https://images.unsplash.com/photo-1516738901171-8eb4fc13bd20?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+    background-size: cover;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#default-search {
+    font-size: 25px;
+    margin-top: 300px;
+    width: 800px;
+    display: flex;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.search-button {
+    font-size: 25px !important;
+    height: 70% !important;
+}
+
+/* 
+========== MAP PAGE STYLES ==============
+*/
+.maps-page-container {
+    display: flex;
+    height: 100vh;
+}
+
+.google-map {
+    display: flex;
+    width: 100%;
+}
+
+.places-list {
+    width: 600px;
+}
+
+.places-list div {
+    margin-bottom: 30px;
+}
+
+.places-list div img {
+    width: 100%;
+    height: 200px;
 }
