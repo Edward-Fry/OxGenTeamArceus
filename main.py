@@ -24,8 +24,3 @@ def get_home_page(prompt: Annotated[str, Form()]):
 def get_map_page(request: Request, prompt: str):
     locations = gmaps.get_places_images_and_locations_from_text(prompt)
     return templates.TemplateResponse("map_page.html", {"request": request, "prompt": prompt, "locations": locations})
-
-@app.get("/test/{prompt}", response_class=HTMLResponse)
-def testtt(request: Request, prompt: str):
-    locations = gmaps.get_places_images_and_locations_from_text(prompt)
-    return templates.TemplateResponse("test.html", {"request": request, "prompt": prompt, "locations": locations})

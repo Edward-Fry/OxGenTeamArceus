@@ -43,10 +43,10 @@
     height: 100vh;
 }
 
-/* .map {
+#map {
     display: flex;
     width: 100%;
-} */
+}
 
 .places-list {
     width: 600px;
