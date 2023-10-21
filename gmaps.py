@@ -2,6 +2,7 @@
 
 This file gets the locations and pictures of places from google maps
 """
+import base64
 
 import googlemaps
 
@@ -46,7 +47,7 @@ def get_and_render_image_details_from_place(place: dict) -> str:
             byte_string += chunk
             # f.write(chunk)
     # f.close()
-    return byte_string
+    return base64.b64encode(byte_string).decode("utf-8")
 
 
 def get_places_images_and_locations_from_text(search_text: str) -> list[dict]:
