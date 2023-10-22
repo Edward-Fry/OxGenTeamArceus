@@ -1,6 +1,7 @@
 import openai
+import os
 
-OPENAI_API_KEY = "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"
+OPENAI_API_KEY = os.environ["openapi_key"]
 def extract_key_info_from_prompt(prompt:str) -> str:
 
     openai.api_key = OPENAI_API_KEY

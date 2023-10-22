@@ -1,8 +1,8 @@
 import openai
-
+import os
 import prompt_filtering
 
-OPENAI_API_KEY = "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"
+OPENAI_API_KEY = os.environ["openapi_key"]
 
 PROMPT_MESSAGE = 'Using the above sentence complete the following task, ' \
                  'do not answer until you have fully read and understood the prompt. ' \
