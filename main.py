@@ -1,3 +1,4 @@
+import json
 from typing import Annotated
 
 from fastapi import FastAPI, Request, Form
@@ -23,4 +24,5 @@ def get_home_page(prompt: Annotated[str, Form()]):
 @app.get("/map/{prompt}", response_class=HTMLResponse)
 def get_map_page(request: Request, prompt: str):
     locations = gmaps.get_places_images_and_locations_from_text(prompt)
-    return templates.TemplateResponse("map_page.html", {"request": request, "prompt": prompt, "locations": locations})
+    marker_positions = json.dumps([{"lat": l["lat"], "lng": l["lng"]} for l in locations])
+    return templates.TemplateResponse("map_page.html", {"request": request, "prompt": prompt, "locations": locations, "marker_positions": marker_positions})
