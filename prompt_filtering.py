@@ -1,6 +1,6 @@
 import openai
 
-OPENAI_API_KEY = "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"
+OPENAI_API_KEY = "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"
 def extract_key_info_from_prompt(prompt:str) -> str:
 
     openai.api_key = OPENAI_API_KEY

@@ -51,7 +51,7 @@ def get_and_render_image_details_from_place(place: dict) -> str:
     return base64.b64encode(byte_string).decode("utf-8")
 
 @lru_cache(maxsize=256)
-def get_places_images_and_locations_from_text(search_text: str) -> list[dict]:
+def get_places_images_and_locations_from_text(search_text: str, max_places: int = 3) -> list[dict]:
     """
     Finds the places and information from the text
     """
@@ -61,7 +61,7 @@ def get_places_images_and_locations_from_text(search_text: str) -> list[dict]:
     already_seen_names = set()
     print(f'Found {len(places)} places for {search_text}')
     if len(places) > 0:
-        places = places[:3]
+        places = places[:max_places]
         for place in places:
             name = get_place_name_from_place(place)
             if name in already_seen_names:

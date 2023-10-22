@@ -1,9 +1,8 @@
 import openai
-import json
 
 import prompt_filtering
 
-OPENAI_API_KEY = "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"
+OPENAI_API_KEY = "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"
 
 PROMPT_MESSAGE = 'Using the above sentence complete the following task, ' \
                  'do not answer until you have fully read and understood the prompt. ' \
@@ -11,7 +10,7 @@ PROMPT_MESSAGE = 'Using the above sentence complete the following task, ' \
                  'Requirement 1: Extract the starting position and ending position of the subject from the sentence. ' \
                  'Requirement 2: Extract all landmarks the subject mentions in the sentence.  ' \
                  'Requirement 3: Extract the object/landmark the subject wants to locate using the context of the sentence and how far along the journey they were when seeing it. For example, if the sentence was: There’s a nice forest with lots of running routes, about a 20 minute drive from Wordsley in the direction of Kidderminster {"starting_position": "Wordsley", "ending_position": "Kidderminster", "landmarks": "["forest", "running routes"]", "time": "20 minute drive", "landmark_of_interest": "forest"} Note how the landmarks were returned as a python list. If a field is not given by the subject just enter "not specified".'
-def get_location_predictions(key_prompt_info:str) -> list[str]:
+def get_location_predictions(key_prompt_info:str,max_location_predictions: int = 3 ) -> list[str]:
 
     openai.api_key = OPENAI_API_KEY
 
@@ -34,7 +33,7 @@ def get_location_predictions(key_prompt_info:str) -> list[str]:
     if len(api_response) > 10:
         possible_matches = [(" ").join(name.split(' ')[1:]) for name in api_response.split('\n')]
 
-    return possible_matches
+    return possible_matches[:max_location_predictions]
     
 if __name__ == "__main__":
     test_prompt = "There’s a nice forest with lots of running routes, about a 20 minute drive from Wordsley in the direction of Kidderminster"
