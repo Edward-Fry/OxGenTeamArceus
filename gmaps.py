@@ -59,17 +59,20 @@ def get_places_images_and_locations_from_text(search_text: str) -> list[dict]:
     places = places
     places_and_information = []
     already_seen_names = set()
+    print(f'Found {len(places)} places for {search_text}')
     if len(places) > 0:
+        places = places[:3]
         for place in places:
             name = get_place_name_from_place(place)
             if name in already_seen_names:
                 continue
             already_seen_names.add(name)
             lat, lng = get_location_from_place(place)
+            if 'photos' not in place:
+                print(f'No photos for {name}')
+                continue
             image = get_and_render_image_details_from_place(place)
             places_and_information.append({'name' : name,'lat': lat, 'lng': lng, 'image': image})
-    else:
-        print('No places found')
 
     return places_and_information
 
@@ -77,5 +80,3 @@ if __name__ == "__main__":
     # search for places with the word 'Kenwood House' in them
     place_information = get_places_images_and_locations_from_text('Kenwood House')
     # print(place_information)
-
-    dud = 0

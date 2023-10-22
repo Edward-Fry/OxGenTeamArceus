@@ -1,0 +1,4 @@
+Using the above sentence complete the following task, do not answer until you have fully read and understood the prompt. All requirements of the prompt must be followed. Requirement 1: Extract the starting position and ending position of the subject from the sentence. Requirement 2: Extract all landmarks the subject mentions in the sentence.  Requirement 3: Extract the object/landmark the subject wants to locate using the context of the sentence and how far along the journey they were when seeing it.
+For example, if the sentence was: There’s a nice forest with lots of running routes, about a 20 minute drive from Wordsley in the direction of Kidderminster
+{"starting_position": "Wordsley", "ending_position": "Kidderminster", "landmarks": "["forest", "running routes"]", "time": "20 minute drive", "landmark_of_interest": "forest"}
+Note how the landmarks were returned as a python list. If a field is not given by the subject just enter "not specified".

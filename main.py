@@ -8,6 +8,8 @@ from fastapi.templating import Jinja2Templates
 import starlette.status as status
 import gmaps
 
+import uvicorn
+
 app = FastAPI()
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -26,3 +28,7 @@ def get_map_page(request: Request, prompt: str):
     locations = gmaps.get_places_images_and_locations_from_text(prompt)
     marker_positions = json.dumps([{"lat": l["lat"], "lng": l["lng"]} for l in locations])
     return templates.TemplateResponse("map_page.html", {"request": request, "prompt": prompt, "locations": locations, "marker_positions": marker_positions})
+
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="localhost", port=8000)
