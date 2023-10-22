@@ -24,5 +24,5 @@ def get_home_page(prompt: Annotated[str, Form()]):
 @app.get("/map/{prompt}", response_class=HTMLResponse)
 def get_map_page(request: Request, prompt: str):
     locations = gmaps.get_places_images_and_locations_from_text(prompt)
-    marker_positions = json.dumps([{"lat": l["lat"], "lng": l["lng"]} for l in locations])
-    return templates.TemplateResponse("map_page.html", {"request": request, "prompt": prompt, "locations": locations, "marker_positions": marker_positions})
+    marker_data = json.dumps([ {"lat": l["lat"], "lng": l["lng"], "title": l["name"]} for l in locations])
+    return templates.TemplateResponse("map_page.html", {"request": request, "prompt": prompt, "locations": locations, "marker_data": marker_data})
