@@ -3,6 +3,7 @@
 This file gets the locations and pictures of places from google maps
 """
 import base64
+from functools import lru_cache
 
 import googlemaps
 
@@ -49,16 +50,21 @@ def get_and_render_image_details_from_place(place: dict) -> str:
     # f.close()
     return base64.b64encode(byte_string).decode("utf-8")
 
-
+@lru_cache(maxsize=256)
 def get_places_images_and_locations_from_text(search_text: str) -> list[dict]:
     """
     Finds the places and information from the text
     """
     places = get_places_from_text(search_text)
+    places = places
     places_and_information = []
+    already_seen_names = set()
     if len(places) > 0:
         for place in places:
             name = get_place_name_from_place(place)
+            if name in already_seen_names:
+                continue
+            already_seen_names.add(name)
             lat, lng = get_location_from_place(place)
             image = get_and_render_image_details_from_place(place)
             places_and_information.append({'name' : name,'lat': lat, 'lng': lng, 'image': image})

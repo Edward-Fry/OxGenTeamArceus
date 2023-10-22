@@ -7,7 +7,7 @@
     <div class="places-list">
         {% for l in locations %}
         <div>
-            <!-- <img src="data:image/jpeg;base64,{{ l.image }}" /> -->
+            <img src="data:image/jpeg;base64,{{ l.image }}" />
             <h1>{{l.name}}</h1>
         </div>
         {% endfor %}
@@ -24,17 +24,18 @@
             const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
             map = new Map(document.getElementById("map"), {
-                zoom: 4,
+                zoom: 14,
                 mapId: "DEMO_MAP_ID",
             });
 
-            // const locations = JSON.parse({{ locations | tojson}})
-            // for (l of locations) {
-            //     new google.maps.Marker({
-            //         position: { lat: l.lat, lng: l.lng },
-            //         map,
-            //     });
-            // }
+            const markerPositions = JSON.parse({{ marker_positions | tojson}})
+            map.setCenter({lat: markerPositions[0].lat, lng: markerPositions[0].lng})
+            for (l of markerPositions) {
+                new google.maps.Marker({
+                    position: { lat: l.lat, lng: l.lng },
+                    map,
+                });
+            }
         }
 
         initMap();
